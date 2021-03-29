@@ -10,7 +10,7 @@
     portal page to display Your deployment is complete
   
   * Reference:
-  * https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal
+    * https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal
 
   
  
