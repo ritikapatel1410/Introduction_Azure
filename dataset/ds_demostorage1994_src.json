@@ -1,0 +1,37 @@
+{
+	"name": "ds_demostorage1994_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_demostorage1994",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage_name": {
+					"value": "@dataset().storage",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"storage": {
+				"type": "string"
+			},
+			"folder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sample.txt",
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"container": "democontainer"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

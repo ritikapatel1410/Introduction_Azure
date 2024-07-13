@@ -1,0 +1,132 @@
+{
+	"name": "copy_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data_demo",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_demostorage1994_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"storage": {
+								"value": "@pipeline().parameters.pip_storage",
+								"type": "Expression"
+							},
+							"folder": "demo"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_demostorage1994_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"storage": {
+								"value": "@pipeline().parameters.pip_storage",
+								"type": "Expression"
+							},
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Get Metadata",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Copy data_demo",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_demostorage1994_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"storage": {
+								"value": "@pipeline().parameters.pip_storage",
+								"type": "Expression"
+							},
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"itemName",
+						"itemType",
+						"lastModified",
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"pip_storage": {
+				"type": "string",
+				"defaultValue": "demostorage1994"
+			},
+			"folder": {
+				"type": "string",
+				"defaultValue": "pip"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-07-12T19:27:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

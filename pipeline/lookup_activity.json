@@ -1,0 +1,47 @@
+{
+	"name": "lookup_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_Delimited",
+						"type": "DatasetReference",
+						"parameters": {
+							"storage_ds": "demostorage1994",
+							"container_ds": "democontainer",
+							"folder_ds": "pip",
+							"file_ds": "abc.txt"
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-07-12T19:27:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,67 @@
+{
+	"name": "ds_Delimited",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_demostorage1994",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage_name": {
+					"value": "@dataset().storage_ds",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"storage_ds": {
+				"type": "string",
+				"defaultValue": "demostorage1994"
+			},
+			"container_ds": {
+				"type": "string",
+				"defaultValue": "democontainer"
+			},
+			"folder_ds": {
+				"type": "string",
+				"defaultValue": "pip"
+			},
+			"file_ds": {
+				"type": "string",
+				"defaultValue": "abc.txt"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().file_ds",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder_ds",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container_ds",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Ritika",
+				"type": "String"
+			},
+			{
+				"name": " Patel",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
